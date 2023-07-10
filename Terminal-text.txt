@@ -1,0 +1,1588 @@
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+7565f06 (HEAD -> main, origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git diff ^C
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline a78a78a
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+    Ignored new file
+
+commit 89cf7272a845c2dff2161c84243967ad75264916
+Author: Yasha <yashasidin333@yandex.ru>
+Date:   Tue May 30 22:34:54 2023 +0300
+
+    Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+7565f06 (HEAD -> main, origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git diff a78a78a 94c38c7
+diff --git a/.gitignore b/.gitignore
+index b74ecb6..205ea1b 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -2,7 +2,7 @@ target/
+ !.mvn/wrapper/maven-wrapper.jar
+ !**/src/main/**/target/
+ !**/src/test/**/target/
+-!**/src/main/java/MainFrame.java
++src/main/java/MainFrame.java
+ 
+ ### IntelliJ IDEA ###
+ .idea/modules.xml
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git diff 7565f06
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git diff 7565f06 a78a78a
+diff --git a/README.md b/README.md
+deleted file mode 100644
+index a61ddfe..0000000
+--- a/README.md
++++ /dev/null
+@@ -1,18 +0,0 @@
+-## Getting Started
+-
+-Welcomу to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+-
+-## Folder Structure
+-
+-The workspace contains two folders by default, where:
+-
+-- `src`: the folder to maintain sources
+-- `lib`: the folder to maintain dependencies
+-
+-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+-
+-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+-
+-## Dependency Management
+-
+-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+diff --git a/src/main/java/App.java b/src/main/java/App.java
+index 5876946..1e0bf00 100644
+--- a/src/main/java/App.java
++++ b/src/main/java/App.java
+@@ -5,19 +5,24 @@ import VendingMachines.VendingMachine;
+
+ public class App {
+     public static void main(String[] args) throws Exception {
+-        Product item1 = new Product("Lays", "Чипсы", 59);
++        Product item1 = new Product(1, "Lays", "Чипсы", 59);
+         item1.setPrice(98);
+-        Product item2 = new Bottle( "Cola", "Water", 70, 500);
++        Product item2 = new Bottle(2, "Cola", "Water", 70, 500);
+
+         VendingMachine iMachine = new VendingMachine(300);
+         iMachine.addProduct(item1);
+         iMachine.addProduct(item2);
+-        iMachine.addProduct(new Product("Масло", "Масло", 59));
+-        iMachine.addProduct(new Bottle("Water", "Water", 170, 1500));
+-        iMachine.addProduct(new HotDrink("Cofe", "Cofe", 105, 70));
+-        iMachine.addProduct(new HotDrink("Tea", "Cofe", 60, 80));
++        iMachine.addProduct(new Product(3, "Масло", "Масло", 59));
++        iMachine.addProduct(new Bottle(4, "Water", "Water", 170, 1500));
++        iMachine.addProduct(new HotDrink(5, "Cofe", "Cofe", 105, 70));
++        iMachine.addProduct(new HotDrink(6, "Tea", "Cofe", 60, 80));
+
+-        MainFrame myFrame = new MainFrame();
+-        myFrame.initialize(iMachine);
++        for(Product prod: iMachine.getProducts())
++        {
++            System.out.println(prod.toString());
++        }
++
++//        MainFrame myFrame = new MainFrame();
++//        myFrame.initialize(iMachine);
+     }
+ }
+\ No newline at end of file
+diff --git a/src/main/java/Customer/Customer.java b/src/main/java/Customer/Customer.java
+deleted file mode 100644
+index ddbe8ad..0000000
+--- a/src/main/java/Customer/Customer.java
++++ /dev/null
+@@ -1,5 +0,0 @@
+-package Customer;
+-
+-public class Customer {
+-
+-}
+diff --git a/src/main/java/Domen/Bottle.java b/src/main/java/Domen/Bottle.java
+index bd0e994..833a00d 100644
+--- a/src/main/java/Domen/Bottle.java
++++ b/src/main/java/Domen/Bottle.java
+@@ -6,14 +6,15 @@ public class Bottle extends Product {
+     /**
+      * Create a bottle(extends product) for VM
+      *
++     * @param productId       id of product
+      * @param productName     name of product
+      * @param productCategory category of product
+      * @param price           value of price of this product
+      * @param volume          volume of bottle
+      * @throws Exception      if the price < 0
+      */
+-    public Bottle(String productName, String productCategory, double price, int volume) throws Exception {
+-        super(productName, productCategory, price);
++    public Bottle(int productId, String productName, String productCategory, double price, int volume) throws Exception {
++        super(productId, productName, productCategory, price);
+         this.volume = volume;
+     }
+
+@@ -28,8 +29,8 @@ public class Bottle extends Product {
+     @Override
+     public String toString()
+     {
+-        return "Product{" + "ProductId: " + super.getProductId() +
+-                ", name: '" + super.getProductName() + '\'' +
++        return "Product{" +
++                "name: '" + super.getProductName() + '\'' +
+                 ", category: '" + super.getProductCategory() + '\'' +
+                 ", cost: " + super.getPrice() +
+                 ", volume: " + volume +
+diff --git a/src/main/java/Domen/HotDrink.java b/src/main/java/Domen/HotDrink.java
+index 3c66035..6e83a2c 100644
+--- a/src/main/java/Domen/HotDrink.java
++++ b/src/main/java/Domen/HotDrink.java
+@@ -6,16 +6,16 @@ public class HotDrink extends Product{
+     /**
+      * Create a hot drink(extends product) for VM
+      *
++     * @param productId       id of product
+      * @param productName     name of product
+      * @param productCategory category of product
+      * @param price           value of price of this product
+      * @param temperature     temperature of hot drink
+      * @throws Exception      if the price < 0
+      */
+-    public HotDrink(String productName, String productCategory, double price, double temperature) throws Exception {
+-        super(productName, productCategory, price);
++    public HotDrink(int productId, String productName, String productCategory, double price, double temperature) throws Exception {
++        super(productId, productName, productCategory, price);
+         this.temperature = temperature;
+-
+     }
+
+     public double getTemperature() { return temperature; }
+@@ -25,8 +25,8 @@ public class HotDrink extends Product{
+     @Override
+     public String toString()
+     {
+-        return "Product{" + "ProductId: " + super.getProductId() +
+-                ", name: '" + super.getProductName() + '\'' +
++        return "Product{" +
++                "name: '" + super.getProductName() + '\'' +
+                 ", category: '" + super.getProductCategory() + '\'' +
+                 ", cost: " + super.getPrice() +
+                 ", temperature: " + temperature +
+diff --git a/src/main/java/Domen/Product.java b/src/main/java/Domen/Product.java
+index f7c226f..f72ca0a 100644
+--- a/src/main/java/Domen/Product.java
++++ b/src/main/java/Domen/Product.java
+@@ -2,22 +2,22 @@ package Domen;
+
+ public class Product {
+
+-    private static int count = 0;
+-    private int productId = 0;
++    private int productId;
+     private String productName;//for displaying to customer
+     private String productCategory;
+     private double price;
++
+     /**
+      * Create a product for VM
+      *
+-     *
++     * @param productId       id of product
+      * @param productName     name of product
+      * @param productCategory category of product
+      * @param price           value of price of this product
+      * @throws Exception      if the price < 0
+      */
+-    public Product(String productName, String productCategory, double price) throws Exception{
+-        productId = ++count;
++    public Product(int productId, String productName, String productCategory, double price) throws Exception{
++        this.productId = productId;
+         this.productName = productName;
+         this.productCategory = productCategory;
+         this.price = price;
+@@ -27,18 +27,18 @@ public class Product {
+         return productId;
+     }
+
+-
+     // public void setProductId(int productId) {
+     //     this.productId = productId;
+     // }
++
+     public String getProductName() {
+         return productName;
+     }
+
+-
+     // public void setProductName(String productName) {
+     //     this.productName = productName;
+     // }
++
+     public String getProductCategory() {
+         return productCategory;
+     }
+@@ -58,15 +58,11 @@ public class Product {
+         this.price = price;
+     }
+
+-    public int getCount() {
+-        return count;
+-    }
+-
+     @Override
+     public String toString()
+     {
+-        return "Product{" + "ProductId: " + productId +
+-                ", name: '" + productName + '\'' +
++        return "Product{" +
++                "name: '" + productName + '\'' +
+                 ", category: '" + productCategory + '\'' +
+                 ", cost: " + price +
+                 '}';
+diff --git a/src/main/java/MainFrame.java b/src/main/java/MainFrame.java
+index 55b3490..a29b60c 100644
+--- a/src/main/java/MainFrame.java
++++ b/src/main/java/MainFrame.java
+@@ -4,94 +4,59 @@ import VendingMachines.VendingMachine;
+ import java.awt.*;
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
+-import java.util.ConcurrentModificationException;
+-import java.util.InputMismatchException;
+ import java.util.PriorityQueue;
+
+ import javax.swing.*;
+-import javax.swing.border.Border;
+
+ public class MainFrame extends JFrame {
+
+
+-    final private Font mainFont = new Font("Segoe print", Font.BOLD, 14);
+-    JTextField amountOfMoney;
++    final private Font mainFont = new Font("Segoe print", Font.BOLD, 18);
+     JTextField idName;
+-    JTextArea textArea;
++
+     JLabel lbWelcome;
+-    JScrollPane scroll;
++
+     public void initialize(VendingMachine iMachine) {
+
+
+-        JLabel lbIdName = new JLabel("Choose product(id): ");
++        JLabel lbIdName = new JLabel("Choose product(num): ");
+         lbIdName.setFont(mainFont);
++
+         idName = new JTextField();
+         idName.setFont(mainFont);
+-        idName.setText("");
+
+-        JLabel lbMoney = new JLabel("Enter money to VM: ");
+-        lbMoney.setFont(mainFont);
+-        amountOfMoney = new JTextField();
+-        amountOfMoney.setFont(mainFont);
+-        amountOfMoney.setText("");
+
+-        textArea = new JTextArea(10, 10);
+-        textArea.setFont(mainFont);
+-        textArea.setText("All products:\n" + iMachine.getStringProducts());
+-        textArea.setBackground(new Color(0, 200, 255));
++
++
+
+         JPanel formPanel = new JPanel();
+-        formPanel.setLayout(new GridLayout(10, 1, 5, 4));
++        formPanel.setLayout(new GridLayout(10, 1, 5, 5));
+         formPanel.add(lbIdName);
+         formPanel.add(idName);
+-        formPanel.add(lbMoney);
+-        formPanel.add(amountOfMoney);
+
+-        JLabel lbWelcome = new JLabel();
++
++
++        lbWelcome = new JLabel();
+         lbWelcome.setFont(mainFont);
+
++
++
+         JButton btnOk = new JButton("Buy");
+         btnOk.setFont(mainFont);
+         btnOk.addActionListener(new ActionListener() {
++
+             @Override
+             public void actionPerformed(ActionEvent e) {
+
+-                try {
+-                    double yourMoney = Double.parseDouble(amountOfMoney.getText());
+-                    int idProduct = Integer.parseInt(idName.getText());
+-                    if (idProduct < 0) {
+-                        lbWelcome.setText("Id must be grater than zero");
+-                        return;
+-                    }
+-                    if (!iMachine.contains(idProduct)) {
+-                        lbWelcome.setText("Vending Machine don't have product with this Id");
+-                        idName.setText("");
+-                        amountOfMoney.setText("");
+-                        return;
+-                    }
+-                    for (Product item : iMachine.getProducts()) {
+-                        if (item.getProductId() == idProduct) {
+-                            String buyingResult = iMachine.buyProduct(item, yourMoney);
+-                            lbWelcome.setText(buyingResult);
+-                            textArea.setText("All products:\n" + iMachine.getStringProducts());
+-                        }
+-                    }
+-                    if (iMachine.getProducts().isEmpty()) {
+-                        lbWelcome.setText("Oh. Product's list is empty:(");
+-                        textArea.setText("Product's list is empty:(");
+-                    }
+-
+-                } catch (ConcurrentModificationException a) {
+-
+-                } catch (NumberFormatException a) {
+-                    lbWelcome.setText("You entered data with error or didn't input one of element or all elements");
++
++                String firstName = idName.getText();
++                for(Product item : iMachine.getProducts()) {
++                    lbWelcome.setText(item.toString());
+                 }
+-                idName.setText("");
+-                amountOfMoney.setText("");
+
+-            }
+
+
++            }
+
+         });
+
+@@ -103,9 +68,10 @@ public class MainFrame extends JFrame {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+
++                idName.setText("");
+                 idName.setText("");
+                 lbWelcome.setText("");
+-                amountOfMoney.setText("");
++
+             }
+
+         });
+@@ -116,42 +82,39 @@ public class MainFrame extends JFrame {
+         buttonPanel.add(btnOk);
+         buttonPanel.add(btnClear);
+
+-//        JPanel custumerPanel = new JPanel();
+-
+
+         JPanel mainPanel = new JPanel();
+         mainPanel.setLayout(new BorderLayout());
+         mainPanel.setBackground(new Color(0, 150, 255));
++
+         mainPanel.add(formPanel, BorderLayout.NORTH);
+-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+-        JScrollPane scroll = new JScrollPane (
+-                textArea,
+-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
+-        );
+
+-        JPanel outputPanel = new JPanel();
+-        outputPanel.add(lbWelcome);
+-        outputPanel.setBackground(new Color(0, 100, 250));
++        mainPanel.add(lbWelcome, BorderLayout.CENTER);
+
+
+-        add(mainPanel, BorderLayout.NORTH);
+-        add(outputPanel, BorderLayout.CENTER);
+-        add(scroll, BorderLayout.SOUTH);
++        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+
++        add(mainPanel);
+
+-        mainPanel.setBorder(BorderFactory.createEmptyBorder(5,5,4,5));
++
++        mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+         formPanel.setOpaque(false);
+         buttonPanel.setOpaque(false);
+
+
+         setTitle("VendingMachines");
+-        setSize(700, 800);
++        setSize(500, 600);
+         setMaximumSize(new Dimension(300, 400));
+         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+         setVisible(true);
+     }
+
++//    public static void main(String[] arg)
++//    {
++//        MainFrame myFrame = new MainFrame();
++//        myFrame.initialize(new VendingMachine(15));
++//    }
++
+ }
+\ No newline at end of file
+diff --git a/src/main/java/VendingMachines/VendingMachine.java b/src/main/java/VendingMachines/VendingMachine.java
+index 595b74d..7c2a0af 100644
+--- a/src/main/java/VendingMachines/VendingMachine.java
++++ b/src/main/java/VendingMachines/VendingMachine.java
+@@ -5,7 +5,6 @@ import java.util.List;
+ import Domen.Product;
+
+ public class VendingMachine {
+-//    int productIdByVendingId;
+     private int volume;
+     private List<Product> products;
+     /**
+@@ -37,32 +36,5 @@ public class VendingMachine {
+         products.add(prod);
+     }
+
+-    public String buyProduct(Product prod, double money) {
+-        double price = prod.getPrice();
+-        if (price <= money) {
+-            double change = money - price;
+-            this.products.remove(prod);
+-            return "You bought a " + prod.getProductName() + ". Congratulate you! Your change: " + change;
+-        } else {
+-            return "There is not enough money to buy this product";
+-        }
+-    }
+-
+-    public String getStringProducts() {
+Revert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+#
+~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~
+~                                                                                                                                                                                       .git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 All-- INSERT --
+Revert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+#
+~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       -- INSERT --E
+Revert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+#
+~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       .git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 AllRevert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+#
+~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       .git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 All-- INSERT --
+Revert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+#
+~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       .git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 All-- INSERT --
+Revert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+#
+~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       .git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 All-- INSERT --
+Revert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+#
+~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       .git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 All
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+#
+~                                                                                                                                                                                       .git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 All-- INSERT --
+Revert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+.git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 Top-- INSERT --
+Revert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+.git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 Top
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+.git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 TopRevert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+.git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 TopRevert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+.git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 TopRevert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+Revert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+.git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 Top-- INSERT --
+Revert  "Add MainFrame and README.md file"
+
+This reverts commit 7565f0617ed3a15ae5fade02d096c97389deecfe.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#       deleted:    README.md
+#       modified:   src/main/java/App.java
+#       deleted:    src/main/java/Customer/Customer.java
+#       modified:   src/main/java/Domen/Bottle.java
+#       modified:   src/main/java/Domen/HotDrink.java
+#       modified:   src/main/java/Domen/Product.java
+#       modified:   src/main/java/MainFrame.java
+#       modified:   src/main/java/VendingMachines/VendingMachine.java
+#
+~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       ~                                                                                                                                                                                       .git/COMMIT_EDITMSG[+] [unix] (00:06 11/07/2023)                                                                                                                                1,43 All-- INSERT --
+-            }
+-        }
+-        return false;
+-    }
+ }
+\ No newline at end of file
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+7565f06 (HEAD -> main, origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git revert 7565f06
+hint: Waiting for your editor to close the file...
+
+
+
+                                                   Vim: Error reading input, exiting...
+Vim: preserving files...
+Vim: Finished.
+error: There was a problem with the editor 'vi'.
+Please supply the message using either -m or -F option.
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+7565f06 (HEAD -> main, origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git revert 7565f06
+error: your local changes would be overwritten by revert.
+hint: commit your changes or stash them to proceed.
+fatal: revert failed
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git commit -m "First revert"
+[main 05d6f04] First revert
+ 8 files changed, 66 insertions(+), 152 deletions(-)
+ delete mode 100644 README.md
+ delete mode 100644 src/main/java/Customer/Customer.java
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+05d6f04 (HEAD -> main) First revert
+7565f06 (origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git diff 05d6f04 7565f06
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..a61ddfe
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,18 @@
++## Getting Started
++
++Welcomу to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
++
++## Folder Structure
++
++The workspace contains two folders by default, where:
++
++- `src`: the folder to maintain sources
++- `lib`: the folder to maintain dependencies
++
++Meanwhile, the compiled output files will be generated in the `bin` folder by default.
++
++> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
++
++## Dependency Management
++
++The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+diff --git a/src/main/java/App.java b/src/main/java/App.java
+index 1e0bf00..5876946 100644
+--- a/src/main/java/App.java
++++ b/src/main/java/App.java
+@@ -5,24 +5,19 @@ import VendingMachines.VendingMachine;
+
+ public class App {
+     public static void main(String[] args) throws Exception {
+-        Product item1 = new Product(1, "Lays", "Чипсы", 59);
++        Product item1 = new Product("Lays", "Чипсы", 59);
+         item1.setPrice(98);
+-        Product item2 = new Bottle(2, "Cola", "Water", 70, 500);
++        Product item2 = new Bottle( "Cola", "Water", 70, 500);
+
+         VendingMachine iMachine = new VendingMachine(300);
+         iMachine.addProduct(item1);
+         iMachine.addProduct(item2);
+-        iMachine.addProduct(new Product(3, "Масло", "Масло", 59));
+-        iMachine.addProduct(new Bottle(4, "Water", "Water", 170, 1500));
+-        iMachine.addProduct(new HotDrink(5, "Cofe", "Cofe", 105, 70));
+-        iMachine.addProduct(new HotDrink(6, "Tea", "Cofe", 60, 80));
++        iMachine.addProduct(new Product("Масло", "Масло", 59));
++        iMachine.addProduct(new Bottle("Water", "Water", 170, 1500));
++        iMachine.addProduct(new HotDrink("Cofe", "Cofe", 105, 70));
++        iMachine.addProduct(new HotDrink("Tea", "Cofe", 60, 80));
+
+-        for(Product prod: iMachine.getProducts())
+-        {
+-            System.out.println(prod.toString());
+-        }
+-
+-//        MainFrame myFrame = new MainFrame();
+-//        myFrame.initialize(iMachine);
++        MainFrame myFrame = new MainFrame();
++        myFrame.initialize(iMachine);
+     }
+ }
+\ No newline at end of file
+diff --git a/src/main/java/Customer/Customer.java b/src/main/java/Customer/Customer.java
+new file mode 100644
+index 0000000..ddbe8ad
+--- /dev/null
++++ b/src/main/java/Customer/Customer.java
+@@ -0,0 +1,5 @@
++package Customer;
++
++public class Customer {
++
++}
+diff --git a/src/main/java/Domen/Bottle.java b/src/main/java/Domen/Bottle.java
+index 833a00d..bd0e994 100644
+--- a/src/main/java/Domen/Bottle.java
++++ b/src/main/java/Domen/Bottle.java
+@@ -6,15 +6,14 @@ public class Bottle extends Product {
+     /**
+      * Create a bottle(extends product) for VM
+      *
+-     * @param productId       id of product
+      * @param productName     name of product
+      * @param productCategory category of product
+      * @param price           value of price of this product
+      * @param volume          volume of bottle
+      * @throws Exception      if the price < 0
+      */
+-    public Bottle(int productId, String productName, String productCategory, double price, int volume) throws Exception {
+-        super(productId, productName, productCategory, price);
++    public Bottle(String productName, String productCategory, double price, int volume) throws Exception {
++        super(productName, productCategory, price);
+         this.volume = volume;
+     }
+
+@@ -29,8 +28,8 @@ public class Bottle extends Product {
+     @Override
+     public String toString()
+     {
+-        return "Product{" +
+-                "name: '" + super.getProductName() + '\'' +
++        return "Product{" + "ProductId: " + super.getProductId() +
++                ", name: '" + super.getProductName() + '\'' +
+                 ", category: '" + super.getProductCategory() + '\'' +
+                 ", cost: " + super.getPrice() +
+                 ", volume: " + volume +
+diff --git a/src/main/java/Domen/HotDrink.java b/src/main/java/Domen/HotDrink.java
+index 6e83a2c..3c66035 100644
+--- a/src/main/java/Domen/HotDrink.java
++++ b/src/main/java/Domen/HotDrink.java
+@@ -6,16 +6,16 @@ public class HotDrink extends Product{
+     /**
+      * Create a hot drink(extends product) for VM
+      *
+-     * @param productId       id of product
+      * @param productName     name of product
+      * @param productCategory category of product
+      * @param price           value of price of this product
+      * @param temperature     temperature of hot drink
+      * @throws Exception      if the price < 0
+      */
+-    public HotDrink(int productId, String productName, String productCategory, double price, double temperature) throws Exception {
+-        super(productId, productName, productCategory, price);
++    public HotDrink(String productName, String productCategory, double price, double temperature) throws Exception {
++        super(productName, productCategory, price);
+         this.temperature = temperature;
++
+     }
+
+     public double getTemperature() { return temperature; }
+@@ -25,8 +25,8 @@ public class HotDrink extends Product{
+     @Override
+     public String toString()
+     {
+-        return "Product{" +
+-                "name: '" + super.getProductName() + '\'' +
++        return "Product{" + "ProductId: " + super.getProductId() +
++                ", name: '" + super.getProductName() + '\'' +
+                 ", category: '" + super.getProductCategory() + '\'' +
+                 ", cost: " + super.getPrice() +
+                 ", temperature: " + temperature +
+diff --git a/src/main/java/Domen/Product.java b/src/main/java/Domen/Product.java
+index f72ca0a..f7c226f 100644
+--- a/src/main/java/Domen/Product.java
++++ b/src/main/java/Domen/Product.java
+@@ -2,22 +2,22 @@ package Domen;
+
+ public class Product {
+
+-    private int productId;
++    private static int count = 0;
++    private int productId = 0;
+     private String productName;//for displaying to customer
+     private String productCategory;
+     private double price;
+-
+     /**
+      * Create a product for VM
+      *
+-     * @param productId       id of product
++     *
+      * @param productName     name of product
+      * @param productCategory category of product
+      * @param price           value of price of this product
+      * @throws Exception      if the price < 0
+      */
+-    public Product(int productId, String productName, String productCategory, double price) throws Exception{
+-        this.productId = productId;
++    public Product(String productName, String productCategory, double price) throws Exception{
++        productId = ++count;
+         this.productName = productName;
+         this.productCategory = productCategory;
+         this.price = price;
+@@ -27,18 +27,18 @@ public class Product {
+         return productId;
+     }
+
++
+     // public void setProductId(int productId) {
+     //     this.productId = productId;
+     // }
+-
+     public String getProductName() {
+         return productName;
+     }
+
++
+     // public void setProductName(String productName) {
+     //     this.productName = productName;
+     // }
+-
+     public String getProductCategory() {
+         return productCategory;
+     }
+@@ -58,11 +58,15 @@ public class Product {
+         this.price = price;
+     }
+
++    public int getCount() {
++        return count;
++    }
++
+     @Override
+     public String toString()
+     {
+-        return "Product{" +
+-                "name: '" + productName + '\'' +
++        return "Product{" + "ProductId: " + productId +
++                ", name: '" + productName + '\'' +
+                 ", category: '" + productCategory + '\'' +
+                 ", cost: " + price +
+                 '}';
+diff --git a/src/main/java/MainFrame.java b/src/main/java/MainFrame.java
+index a29b60c..55b3490 100644
+--- a/src/main/java/MainFrame.java
++++ b/src/main/java/MainFrame.java
+@@ -4,59 +4,94 @@ import VendingMachines.VendingMachine;
+ import java.awt.*;
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
++import java.util.ConcurrentModificationException;
++import java.util.InputMismatchException;
+ import java.util.PriorityQueue;
+
+ import javax.swing.*;
++import javax.swing.border.Border;
+
+ public class MainFrame extends JFrame {
+
+
+-    final private Font mainFont = new Font("Segoe print", Font.BOLD, 18);
++    final private Font mainFont = new Font("Segoe print", Font.BOLD, 14);
++    JTextField amountOfMoney;
+     JTextField idName;
+-
++    JTextArea textArea;
+     JLabel lbWelcome;
+-
++    JScrollPane scroll;
+     public void initialize(VendingMachine iMachine) {
+
+
+-        JLabel lbIdName = new JLabel("Choose product(num): ");
++        JLabel lbIdName = new JLabel("Choose product(id): ");
+         lbIdName.setFont(mainFont);
+-
+         idName = new JTextField();
+         idName.setFont(mainFont);
++        idName.setText("");
+
++        JLabel lbMoney = new JLabel("Enter money to VM: ");
++        lbMoney.setFont(mainFont);
++        amountOfMoney = new JTextField();
++        amountOfMoney.setFont(mainFont);
++        amountOfMoney.setText("");
+
+-
+-
++        textArea = new JTextArea(10, 10);
++        textArea.setFont(mainFont);
++        textArea.setText("All products:\n" + iMachine.getStringProducts());
++        textArea.setBackground(new Color(0, 200, 255));
+
+         JPanel formPanel = new JPanel();
+-        formPanel.setLayout(new GridLayout(10, 1, 5, 5));
++        formPanel.setLayout(new GridLayout(10, 1, 5, 4));
+         formPanel.add(lbIdName);
+         formPanel.add(idName);
++        formPanel.add(lbMoney);
++        formPanel.add(amountOfMoney);
+
+-
+-
+-        lbWelcome = new JLabel();
++        JLabel lbWelcome = new JLabel();
+         lbWelcome.setFont(mainFont);
+
+-
+-
+         JButton btnOk = new JButton("Buy");
+         btnOk.setFont(mainFont);
+         btnOk.addActionListener(new ActionListener() {
+-
+             @Override
+             public void actionPerformed(ActionEvent e) {
+
+-
+-                String firstName = idName.getText();
+-                for(Product item : iMachine.getProducts()) {
+-                    lbWelcome.setText(item.toString());
++                try {
++                    double yourMoney = Double.parseDouble(amountOfMoney.getText());
++                    int idProduct = Integer.parseInt(idName.getText());
++                    if (idProduct < 0) {
++                        lbWelcome.setText("Id must be grater than zero");
++                        return;
++                    }
++                    if (!iMachine.contains(idProduct)) {
++                        lbWelcome.setText("Vending Machine don't have product with this Id");
++                        idName.setText("");
++                        amountOfMoney.setText("");
++                        return;
++                    }
++                    for (Product item : iMachine.getProducts()) {
++                        if (item.getProductId() == idProduct) {
++                            String buyingResult = iMachine.buyProduct(item, yourMoney);
++                            lbWelcome.setText(buyingResult);
++                            textArea.setText("All products:\n" + iMachine.getStringProducts());
++                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E325: ATTENTION
+Found a swap file by the name "~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/.git/.COMMIT_EDITMSG.swp"
++                    }
++                    if (iMachine.getProducts().isEmpty()) {
++                        lbWelcome.setText("Oh. Product's list is empty:(");
++                        textArea.setText("Product's list is empty:(");
++                    }
++
++                } catch (ConcurrentModificationException a) {
++
++                } catch (NumberFormatException a) {
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+05d6f04 (HEAD -> main) First revert
+7565f06 (origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git revert a78a78a
+[main 56462c9] Revert "Ignored new file"
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+56462c9 (HEAD -> main) Revert "Ignored new file"
+05d6f04 First revert
+7565f06 (origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git blame App.java
+fatal: no such path 'App.java' in HEAD
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git blame App
+fatal: no such path 'App' in HEAD
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ ll
+bash: ll: command not found
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ ls -la
+total 18
+drwxr-xr-x 1 yasha 197121   0 Jul 11 00:17 .
+drwxr-xr-x 1 yasha 197121   0 May 30 17:52 ..
+drwxr-xr-x 1 yasha 197121   0 Jul 11 00:18 .git
+-rw-r--r-- 1 yasha 197121 559 Jul 11 00:17 .gitignore
+drwxr-xr-x 1 yasha 197121   0 Jul 11 00:07 .idea
+-rw-r--r-- 1 yasha 197121 670 May 30 17:52 pom.xml
+drwxr-xr-x 1 yasha 197121   0 May 30 17:52 src
+drwxr-xr-x 1 yasha 197121   0 May 30 21:03 target
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ cd src
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src (main)
+$ cd ..
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ cd src
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src (main)
+$ cd java
+bash: cd: java: No such file or directory
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src (main)
+$ ls -la
+total 4
+drwxr-xr-x 1 yasha 197121 0 May 30 17:52 .
+drwxr-xr-x 1 yasha 197121 0 Jul 11 00:17 ..
+drwxr-xr-x 1 yasha 197121 0 May 30 17:52 main
+drwxr-xr-x 1 yasha 197121 0 May 30 17:52 test
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src (main)
+$ cd main/
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src/main (main)
+$ cd java/
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src/main/java (main)
+$ LS -LA
+App.java  Domen  MainFrame.java  VendingMachines
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src/main/java (main)
+$ ls -la
+total 16
+drwxr-xr-x 1 yasha 197121    0 Jul 11 00:10 .
+drwxr-xr-x 1 yasha 197121    0 May 30 17:52 ..
+-rw-r--r-- 1 yasha 197121 1012 Jul 11 00:10 App.java
+drwxr-xr-x 1 yasha 197121    0 Jul 11 00:06 Domen
+-rw-r--r-- 1 yasha 197121 2802 Jul 11 00:06 MainFrame.java
+drwxr-xr-x 1 yasha 197121    0 Jul 11 00:06 VendingMachines
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src/main/java (main)
+$ git blame App.java
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300  1) import Domen.Bottle;
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300  2) import Domen.HotDrink;
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300  3) import Domen.Product;
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300  4) import VendingMachines.VendingMachine;
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300  5)
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300  6) public class App {
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300  7)     public static void main(String[] args) throws Exception {
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300  8)         Product item1 = new Product(1, "Lays", "Чипсы", 59);
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300  9)         item1.setPrice(98);
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 10)         Product item2 = new Bottle(2, "Cola", "Water", 70, 500);
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300 11)
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300 12)         VendingMachine iMachine = new VendingMachine(300);
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300 13)         iMachine.addProduct(item1);
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300 14)         iMachine.addProduct(item2);
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 15)         iMachine.addProduct(new Product(3, "Масло", "Масло", 59));
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 16)         iMachine.addProduct(new Bottle(4, "Water", "Water", 170, 1500));
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 17)         iMachine.addProduct(new HotDrink(5, "Cofe", "Cofe", 105, 70));
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 18)         iMachine.addProduct(new HotDrink(6, "Tea", "Cofe", 60, 80));
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300 19)
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 20)         for(Product prod: iMachine.getProducts())
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 21)         {
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 22)             System.out.println(prod.toString());
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 23)         }
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 24)
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 25) //        MainFrame myFrame = new MainFrame();
+05d6f047 (Yasha             2023-07-11 00:14:45 +0300 26) //        myFrame.initialize(iMachine);
+^89cf727 (Yasha             2023-05-30 22:34:54 +0300 27)     }
+00000000 (Not Committed Yet 2023-07-11 00:22:04 +0300 28) }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E325: ATTENTION
+Found a swap file by the name "~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/.git/.COMMIT_EDITMSG.swp"
+          owned by: yasha   dated: Tue Jul 11 00:13:56 2023
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src/main/java (main)
+$ cd ..
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src/main (main)
+$ cd ..
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP/src (main)
+$ cd ..
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+56462c9 (HEAD -> main) Revert "Ignored new file"
+05d6f04 First revert
+7565f06 (origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git revert 94c38c7
+[main 1e65ecb] Revert "Ignored new file"
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+1e65ecb (HEAD -> main) Revert "Ignored new file"
+56462c9 Revert "Ignored new file"
+05d6f04 First revert
+7565f06 (origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git commit --amend -m "Third revert"
+[main bc58b0c] Third revert
+ Date: Tue Jul 11 00:23:30 2023 +0300
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+bc58b0c (HEAD -> main) Third revert
+56462c9 Revert "Ignored new file"
+05d6f04 First revert
+7565f06 (origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git reset --soft bc58b0c
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+bc58b0c (HEAD -> main) Third revert
+56462c9 Revert "Ignored new file"
+05d6f04 First revert
+7565f06 (origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git reset --soft bc58b0c
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+bc58b0c (HEAD -> main) Third revert
+56462c9 Revert "Ignored new file"
+05d6f04 First revert
+7565f06 (origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git restore
+fatal: you must specify path(s) to restore
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git restore --hard
+error: unknown option `hard'
+usage: git restore [<options>] [--source=<branch>] <file>...
+
+    -s, --source <tree-ish>
+                          which tree-ish to checkout from
+    -S, --staged          restore the index
+    -W, --worktree        restore the working tree (default)
+    --ignore-unmerged     ignore unmerged entries
+    --overlay             use overlay mode
+    -q, --quiet           suppress progress reporting
+    --recurse-submodules[=<checkout>]
+                          control recursive updating of submodules
+    --progress            force progress reporting
+    -m, --merge           perform a 3-way merge with the new branch
+    --conflict <style>    conflict style (merge, diff3, or zdiff3)
+    -2, --ours            checkout our version for unmerged files
+    -3, --theirs          checkout their version for unmerged files
+    -p, --patch           select hunks interactively
+    --ignore-skip-worktree-bits
+                          do not limit pathspecs to sparse entries only
+    --pathspec-from-file <file>
+                          read pathspec from file
+    --pathspec-file-nul   with --pathspec-from-file, pathspec elements are separated with NUL character
+
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 3 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   src/main/java/App.java
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git reset --soft 56462c9
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+56462c9 (HEAD -> main) Revert "Ignored new file"
+05d6f04 First revert
+7565f06 (origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   .gitignore
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   src/main/java/App.java
+
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git restore
+fatal: you must specify path(s) to restore
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git restore --all
+error: unknown option `all'
+usage: git restore [<options>] [--source=<branch>] <file>...
+
+    -s, --source <tree-ish>
+                          which tree-ish to checkout from
+    -S, --staged          restore the index
+    -W, --worktree        restore the working tree (default)
+    --ignore-unmerged     ignore unmerged entries
+    --overlay             use overlay mode
+    -q, --quiet           suppress progress reporting
+    --recurse-submodules[=<checkout>]
+                          control recursive updating of submodules
+    --progress            force progress reporting
+    -m, --merge           perform a 3-way merge with the new branch
+    --conflict <style>    conflict style (merge, diff3, or zdiff3)
+    -2, --ours            checkout our version for unmerged files
+    -3, --theirs          checkout their version for unmerged files
+    -p, --patch           select hunks interactively
+    --ignore-skip-worktree-bits
+                          do not limit pathspecs to sparse entries only
+    --pathspec-from-file <file>
+                          read pathspec from file
+    --pathspec-file-nul   with --pathspec-from-file, pathspec elements are separated with NUL character
+
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git restore -S
+fatal: you must specify path(s) to restore
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   .gitignore
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   src/main/java/App.java
+
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git restore --staged .gitignore
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git restore src/main/java/App.java
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .gitignore
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git restore .gitignore
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git reset --mixed 05d6f04
+Unstaged changes after reset:
+M       .gitignore
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git log --oneline
+05d6f04 (HEAD -> main) First revert
+7565f06 (origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .gitignore
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git restore .gitignore
+
+yasha@Yashik MINGW64 ~/OneDrive/Рабочий стол/GB/Специализация Программист/ООП/Семинар 1/Semi-1-Main-principles-of-OOP (main)
+$ git status
+$ git log --oneline
+7565f06 (HEAD -> main, origin/main) Add MainFrame and README.md file
+a78a78a Ignored new file
+94c38c7 Ignored new file
+89cf727 Add all solve of first task
